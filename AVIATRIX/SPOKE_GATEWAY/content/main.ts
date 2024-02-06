@@ -21,7 +21,7 @@ resource "aviatrix_spoke_gateway" "test_spoke_gateway_aws" {
   vpc_id            = "${{ values.vpcId }}"
   vpc_reg            = "${{ values.region }}"
   gw_size            = "${{ values.gatewaySize }}"
-  subnet            = "10.0.30.0/28"
+  subnet            =  "${{ values.subnet }}"
   single_ip_snat    = false
   manage_ha_gateway = false
   tags              = {
