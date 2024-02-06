@@ -78,6 +78,15 @@ spec:
           enum:
             - PERMIT
             - DENY
+          
+        sourceSmartGroup:
+          title: Source Smart Group
+          type: string
+          description: Enter the Source Smart Group
+        destinationSmartGroup:
+          title: Destination Smart Group
+          type: string
+          description: Enter the Destination Smart Group
             
             
     - title: Choose a location
@@ -110,6 +119,8 @@ spec:
           action1: ${{ parameters.action1 }}
           dfPolicyName2: ${{ parameters.dfPolicyName2 }}
           action2: ${{ parameters.action2 }}
+          sourceSmartGroup: ${{ parameters.sourceSmartGroup }}
+          destinationSmartGroup: ${{ parameters.destinationSmartGroup }}
 
     # This step publishes the contents of the working directory to GitHub.
     - id: publish
