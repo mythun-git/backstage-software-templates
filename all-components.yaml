@@ -11,3 +11,4 @@ spec:
     - ./VPC/bs-tf-vpc-config.yaml
     - ./DCF/bs-tf-dcf-config.yaml
     - ./AVIATRIX/GATEWAY/bss-tf-gateway.yaml
+    - ./AVIATRIX/SPOKE_GATEWAY/bs-ts-spokegw-config.yaml
