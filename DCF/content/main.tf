@@ -1,9 +1,9 @@
 
 # # Configure Aviatrix provider
  provider "aviatrix" {
-   controller_ip           = ${{ values.controllerIP }}
-   username                = ${{ values.userName }}
-   password                = ${{ values.password }}
+   controller_ip           = "${{ values.controllerIP }}"
+   username                = "${{ values.userName }}"
+   password                = "${{ values.password }}"
    skip_version_validation = true
  }
  
@@ -20,8 +20,8 @@ terraform {
  
 resource "aviatrix_distributed_firewalling_policy_list" "test2" {
   policies {
-    name             = ${{ values.dfPolicyName1 }}
-    action           = ${{ values.action1 }}
+    name             = "${{ values.dfPolicyName1 }}"
+    action           = "${{ values.action1 }}"
     priority         = 2
     protocol         = "ANY"
     logging          = false
@@ -35,8 +35,8 @@ resource "aviatrix_distributed_firewalling_policy_list" "test2" {
   }
 
   policies {
-    name             = ${{ values.dfPolicyName2 }}
-    action           = ${{ values.action2 }}
+    name             = "${{ values.dfPolicyName2 }}"
+    action           = "${{ values.action2 }}"
     priority         = 1
     protocol         = "ANY"
     logging          = false
