@@ -10,3 +10,4 @@ spec:
     - ./S3/bs-tf-s3-config.yaml
     - ./VPC/bs-tf-vpc-config.yaml
     - ./DCF/bs-tf-dcf-config.yaml
+    - ./AVIATRIX/GATEWAY/bss-tf-gateway.yaml
