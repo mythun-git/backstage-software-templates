@@ -12,3 +12,4 @@ spec:
     - ./DCF/bs-tf-dcf-config.yaml
     - ./AVIATRIX/GATEWAY/bss-tf-gateway.yaml
     - ./AVIATRIX/SPOKE_GATEWAY/bs-ts-spokegw-config.yaml
+    - ./AVIATRIX/TRANSIT_GATEWAT/bs-tf-transitgw-config.yaml
