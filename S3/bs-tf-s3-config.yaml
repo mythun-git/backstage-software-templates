@@ -82,6 +82,8 @@ spec:
           name: ${{ parameters.name }}
           bucketName: ${{ parameters.bucketName }}
           bucketRegion: ${{ parameters.bucketRegion }}
+          vpcId: ${{ parameters.vpcId }}
+          accessPointName: ${{ parameters.accessPointName }}
 
     # This step publishes the contents of the working directory to GitHub.
     - id: publish
