@@ -1,0 +1,146 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: terraform-aviatrix-gateway
+  title: Terraform Template for Aviatrix Gateway
+  description: Aviatrix Gateway
+spec:
+  owner: mythun-git
+  type: service
+
+  # These parameters are used to generate the input form in the frontend, and are
+  # used to gather input data for the execution of the template.
+  parameters:
+    - title: Enter the resource name
+      required:
+        - name
+      properties:
+        name:
+          title: Name
+          type: string
+          description: Unique name of the resource
+          ui:autofocus: true
+          ui:options:
+            rows: 5
+            
+    - title: Fill Aviatrx Details
+      required:
+        - controllerIP
+        - userName
+        - password
+      properties:
+        controllerIP:
+          title: Controller IP
+          type: string
+          description: Enter the Aviatrix Controller IP
+          ui:autofocus: true
+          ui:options:
+            rows: 5
+
+        userName:
+          title: User Name
+          type: string
+          description: Aviatrix User Name
+
+        password:
+          title: Password
+          type: string
+          description: Enter the Aviatrix Password
+
+    - title: Fill AWS Gateway Details
+      required:
+        - aviatrixAccountName
+        - gatewayName
+        - region
+        - gatewaySize
+      properties:
+        aviatrixGwAccountName:
+          title: Account Name
+          type: string
+          description: Enter Account Name for AWS Gateway
+          ui:autofocus: true
+          ui:options:
+            rows: 5
+        
+        gatewayName:
+          title: Gateway Name
+          type: string
+          desctiption: Enter Name for Gatewat
+
+        gatewaySize:
+          title: Gateway Size
+          type: string
+          description: Select Gateway Size
+          enum:
+            - t2.micro
+            - t2.nano
+            - t3.micro
+        
+        region:
+          title: Region
+          type: string
+          description: Select Deployment region
+          enum:
+            - us-east-1
+            - us-east-2
+            - us-west-1
+            - us-west-2
+
+    - title: Choose a location
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          title: Repository Location
+          type: string
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
+
+  # These steps are executed in the scaffolder backend, using data that we gathered
+  # via the parameters above.
+  steps:
+    # Each step executes an action, in this case one templates files into the working directory.
+    - id: fetch-base
+      name: Fetch Base
+      action: fetch:template
+      input:
+        url: ./content
+        values:
+          name: ${{ parameters.name }}
+          region: ${{ parameters.region }}
+          controllerIP: ${{ parameters.controllerIP }}
+          userName: ${{ parameters.userName }}
+          password: ${{ parameters.password }}
+          aviatrixGwAccountName: ${{ parameters.aviatrixGwAccountName }}
+          gatewayName: ${{ parameters.gatewayName }}
+          gatewaySize: ${{ parameters.gatewaySize }}
+
+
+    # This step publishes the contents of the working directory to GitHub.
+    - id: publish
+      name: Publish
+      action: publish:github
+      input:
+        allowedHosts: ['github.com']
+        description: This is ${{ parameters.name }}
+        repoUrl: ${{ parameters.repoUrl }}
+
+    
+      # The final step is to register our new component in the catalog.
+    - id: register
+      name: Register
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps['publish'].output.repoContentsUrl }}
+        catalogInfoPath: '/catalog-info.yaml'
+
+  # Outputs are displayed to the user after a successful execution of the template.
+  output:
+    links:
+      - title: Repository
+        url: ${{ steps['publish'].output.remoteUrl }}
+      - title: Open in catalog
+        icon: catalog
+        entityRef: ${{ steps['register'].output.entityRef }}
