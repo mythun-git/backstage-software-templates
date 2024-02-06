@@ -1,0 +1,8 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: backstage-groups
+  description: A collection of all Backstage Users and Groups
+spec:
+  targets:
+    - ./TEAM/team-dhruv.yaml
