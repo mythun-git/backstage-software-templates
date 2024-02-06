@@ -8,3 +8,4 @@ spec:
     - ./EC2/bs-tf-ec2-config.yaml
     - ./PG/bs-tf-pg-config.yaml
     - ./S3/bs-tf-s3-config.yaml
+    - ./VPC/bs-tf-vpc-config.yaml
