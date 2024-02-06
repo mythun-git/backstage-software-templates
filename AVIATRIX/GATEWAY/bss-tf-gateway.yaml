@@ -63,7 +63,7 @@ spec:
     
     - title: Fill AWS Gateway Details
       required:
-        - aviatrixAccountName
+        - aviatrixGwAccountName
         - gatewayName
         - region
         - gatewaySize
