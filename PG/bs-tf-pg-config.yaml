@@ -1,7 +1,7 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: terraformt-postgress
+  name: terraform-postgress
   title: Terraform Template for Postgres DB in AWS
   description: Postgress
 spec:
