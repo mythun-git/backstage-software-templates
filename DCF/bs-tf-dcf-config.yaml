@@ -103,8 +103,13 @@ spec:
         url: ./content
         values:
           name: ${{ parameters.name }}
-          region: ${{ parameters.region }}
-          instanceType: ${{ parameters.instanceType }}
+          controllerIP: ${{ parameters.controllerIP }}
+          userName: ${{ parameters.userName }}
+          password: ${{ parameters.password }}
+          dfPolicyName1: ${{ parameters.dfPolicyName1 }}
+          action1: ${{ parameters.action1 }}
+          dfPolicyName2: ${{ parameters.dfPolicyName2 }}
+          action2: ${{ parameters.action2 }}
 
     # This step publishes the contents of the working directory to GitHub.
     - id: publish
