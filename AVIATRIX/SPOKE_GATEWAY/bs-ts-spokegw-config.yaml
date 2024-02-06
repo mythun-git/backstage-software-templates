@@ -1,9 +1,9 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: terraform-aviatrix-gateway
-  title: Terraform Template for Aviatrix Gateway
-  description: Aviatrix Gateway
+  name: terraform-aviatrix-spoke-gateway
+  title: Terraform Template for Aviatrix Spoke Gateway
+  description: Aviatrix Spoke Gateway
 spec:
   owner: mythun-git
   type: service
