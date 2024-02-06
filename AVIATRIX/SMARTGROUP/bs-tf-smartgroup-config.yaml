@@ -91,9 +91,10 @@ spec:
           controllerIP: ${{ parameters.controllerIP }}
           userName: ${{ parameters.userName }}
           password: ${{ parameters.password }}
-          smartGroupName: ${{ parameters.aviatrixGwAccousmartGroupNamentName }}
-          smartGroupAccName: ${{ parameters.gatewayName }}
-          smartGroupExpName: ${{ parameters.gatewaySize }}
+          smartGroupName: ${{ parameters.smartGroupName }}
+          smartGroupAccName: ${{ parameters.smartGroupAccName }}
+          smartGroupExpName: ${{ parameters.smartGroupExpName }}
+
 
     # This step publishes the contents of the working directory to GitHub.
     - id: publish
