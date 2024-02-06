@@ -2,9 +2,8 @@ provider "aws" {
   region = "${{ values.bucketRegion }}"
 }
 
-resource "aws_s3_bucket" "${{values.bucketName}}"{
+resource "aws_s3_bucket" "${{values.bucketName}}" {
   bucket = "${{ values.bucketName }}"
-  
 }
 
 resource "aws_s3_access_point" "msaccesspoint" {
