@@ -26,9 +26,9 @@ resource "aviatrix_gateway" "aviatrix_gateway_aws" {
   account_name       = "${{ values.aviatrixAccountName }}"
   gw_name            = ""${{ values.gatewayName }}""
   vpc_id             = "vpc-0fc6a37e65c750f6a"
-  vpc_reg            = ""${{ values.region }}""
-  gw_size            = ""${{ values.gatewaySize }}""
+  vpc_reg            = "${{ values.region }}"
+  gw_size            = "${{ values.gatewaySize }}"
   subnet             = "10.2.1.0/24"
   #peering_ha_subnet  = "10.2.1.0/24"
-  #peering_ha_gw_size = "t2.micro"
+  #peering_ha_gw_size = "${{ values.gatewaySize }}"
 }
