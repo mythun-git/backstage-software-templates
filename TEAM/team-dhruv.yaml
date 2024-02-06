@@ -32,7 +32,7 @@ spec:
     displayName: User Two
     email: User-Two@example.com
     picture: https://api.dicebear.com/7.x/avataaars/svg?seed=Leo&backgroundColor=transparent
-  memberOf: [team-ddhruv]
+  memberOf: [team-dhruv]
 ---
 apiVersion: backstage.io/v1alpha1
 kind: User
