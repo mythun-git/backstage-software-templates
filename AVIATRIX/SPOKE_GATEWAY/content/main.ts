@@ -18,7 +18,7 @@ resource "aviatrix_spoke_gateway" "test_spoke_gateway_aws" {
   cloud_type        = 1
   account_name       = "${{ values.aviatrixGwAccountName }}"
   gw_name            = "${{ values.gatewayName }}"
-  vpc_id            = "vpc-0e4d6a973774bf5da"
+  vpc_id            = "${{ values.vpcId }}"
   vpc_reg            = "${{ values.region }}"
   gw_size            = "${{ values.gatewaySize }}"
   subnet            = "10.0.30.0/28"
