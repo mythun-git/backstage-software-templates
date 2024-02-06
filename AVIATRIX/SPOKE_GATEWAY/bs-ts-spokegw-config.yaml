@@ -85,6 +85,10 @@ spec:
             - us-east-2
             - us-west-1
             - us-west-2
+        vpcId:
+          title: VPC Id
+          type: string
+          description: Enter VPC Id
 
     - title: Choose a location
       required:
@@ -116,6 +120,7 @@ spec:
           aviatrixGwAccountName: ${{ parameters.aviatrixGwAccountName }}
           gatewayName: ${{ parameters.gatewayName }}
           gatewaySize: ${{ parameters.gatewaySize }}
+          vpcId: ${{ parameters.vpcId }}
 
 
     # This step publishes the contents of the working directory to GitHub.
