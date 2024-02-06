@@ -5,6 +5,6 @@ metadata:
   description: A collection of all Backstage example components
 spec:
   targets:
-    - ./components/artist-lookup-component.yaml
-    - ./components/petstore-component.yaml
-    - ./components/playback-order-component.yaml
+    - ./EC2/bs-tf-ec2-config.yaml
+    - ./PG/bs-tf-pg-config.yaml
+    - ./S3/bs-tf-s3-config.yaml
