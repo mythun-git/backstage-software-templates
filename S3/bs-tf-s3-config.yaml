@@ -26,6 +26,8 @@ spec:
     - title: Fill Bucket Details
       required:
         - bucketName
+        - accessPointName
+        - vpcId
       properties:
         bucketName:
           title: Bucket Name
@@ -43,6 +45,17 @@ spec:
             - us-east-2
             - us-west-1
             - us-west-2
+        accessPointName:
+          title: Access Point Name
+          type: string
+          description: Enter the Access Point name for S3 access point
+        vpcId:
+          title: VPC ID
+          type: string
+          description: Enter the VPC for S3 access point
+
+
+        
             
     - title: Choose a location
       required:
