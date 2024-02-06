@@ -1,9 +1,9 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: terraform-postgress
-  title: Terraform Template for Postgres DB in AWS
-  description: Postgress
+  name: terraform-aviatrix-gateway
+  title: Terraform Template for Aviatrix Gateway
+  description: Aviatrix Gateway
 spec:
   owner: mythun-git
   type: service
@@ -23,61 +23,83 @@ spec:
           ui:options:
             rows: 5
             
-    - title: Fill Postgress DB Details
+    - title: Fill Aviatrx Details
       required:
-        - region
-        - dbIdentifierName
-        - databaseName
-        - env
+        - controllerIP
+        - userName
+        - password
+        - sslCertificate
       properties:
-        dbIdentifierName:
-          title: Database Identification Name
+        controllerIP:
+          title: Controller IP
           type: string
-          description: Enter the Database Identification Name
+          description: Enter the Aviatrix Controller IP
           ui:autofocus: true
           ui:options:
             rows: 5
 
-        region:
-          title: AWS Region
+        userName:
+          title: User Name
           type: string
-          description: The AWS region where the Postgress db will be deployed to
+          description: Aviatrix User Name
+
+        password:
+          title: Password
+          type: string
+          description: Enter the Aviatrix Password
+
+        sslCertificate:
+          title: SSL Certificate Present?
+          type: string
+          description: SSL certificate present?
+          enum: 
+            - 'true'
+            - 'false'
+
+        pathToSslCertificate:
+          title: Path to SSL Certificate
+          type: string
+          description: Enter the path to ssl certificate if SSL certificate is present
+    
+    - title: Fill AWS Gateway Details
+      required:
+        - aviatrixAccountName
+        - gatewayName
+        - region
+        - gatewaySize
+      properties:
+        aviatrixGwAccountName:
+          title: Account Name
+          type: string
+          description: Enter Account Name for AWS Gateway
+          ui:autofocus: true
+          ui:options:
+            rows: 5
+        
+        gatewayName:
+          title: Gateway Name
+          type: string
+          desctiption: Enter Name for Gatewat
+
+        gatewaySize:
+          title: Gateway Size
+          type: string
+          description: Select Gateway Size
+          enum:
+            - t2.micro
+            - t2.nano
+            - t3.micro
+        
+        region:
+          title: Region
+          type: string
+          description: Select Deployment region
           enum:
             - us-east-1
             - us-east-2
             - us-west-1
             - us-west-2
 
-        databaseName:
-          title: Database Name
-          type: string
-          description: Enter the Database Name
-          ui:options:
-            rows: 5
-
-        dbUserName:
-          title: User Name
-          type: string
-          description: Enter the Database User Name
-          ui:options:
-            rows: 5
-
-        dbPassword:
-          title: User Name
-          type: string
-          description: Enter the Database User Name
-          ui:options:
-            rows: 5
-
-        env:
-          title: Environment
-          type: string
-          description: Environment
-          enum:
-            - development
-            - qa
-            - production
-            
     - title: Choose a location
       required:
         - repoUrl
@@ -102,11 +124,15 @@ spec:
         values:
           name: ${{ parameters.name }}
           region: ${{ parameters.region }}
-          dbIdentifierName: ${{ parameters.dbIdentifierName }}
-          databaseName: ${{ parameters.databaseName }}
-          dbUserName: ${{ parameters.dbUserName }}
-          dbPassword: ${{ parameters.dbPassword }}
-          env: ${{ parameters.env }}
+          controllerIP: ${{ parameters.controllerIP }}
+          userName: ${{ parameters.userName }}
+          password: ${{ parameters.password }}
+          sslCertificate: ${{ parameters.sslCertificate }}
+          pathToSslCertificate: ${{ parameters.pathToSslCertificate }}
+          aviatrixGwAccountName: ${{ parameters.aviatrixGwAccountName }}
+          gatewayName: ${{ parameters.gatewayName }}
+          gatewaySize: ${{ parameters.gatewaySize }}
+
 
     # This step publishes the contents of the working directory to GitHub.
     - id: publish
