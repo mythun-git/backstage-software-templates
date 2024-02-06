@@ -1,5 +1,3 @@
-
-# # Configure Aviatrix provider
  provider "aviatrix" {
    controller_ip           = "${{ values.controllerIP }}"
    username                = "${{ values.userName }}"
@@ -18,7 +16,7 @@ terraform {
  
 # Create an Aviatrix Distributed Firewalling Policy List
  
-resource "aviatrix_distributed_firewalling_policy_list" "test2" {
+resource "aviatrix_distributed_firewalling_policy_list" "${{ values.dfPolicyName1 }}" {
   policies {
     name             = "${{ values.dfPolicyName1 }}"
     action           = "${{ values.action1 }}"
@@ -27,10 +25,10 @@ resource "aviatrix_distributed_firewalling_policy_list" "test2" {
     logging          = false
     watch            = false
     src_smart_groups = [
-      "ce4dd1b6-df8e-4dd0-a5f0-9aa08739c521"
+      "${{ values.sourceSmartGroup }}"
     ]
     dst_smart_groups = [
-      "7f2c099d-8fd3-4ac4-93f0-29f132707bb7"
+      "${{ values.destinationSmartGroup }}"
     ]
   }
 
@@ -42,10 +40,10 @@ resource "aviatrix_distributed_firewalling_policy_list" "test2" {
     logging          = false
     watch            = false
     src_smart_groups = [
-      "7f2c099d-8fd3-4ac4-93f0-29f132707bb7"
+      "${{ values.destinationSmartGroup }}"
     ]
     dst_smart_groups = [
-      "ce4dd1b6-df8e-4dd0-a5f0-9aa08739c521"
+      "${{ values.sourceSmartGroup }}"
     ]
   }
  
