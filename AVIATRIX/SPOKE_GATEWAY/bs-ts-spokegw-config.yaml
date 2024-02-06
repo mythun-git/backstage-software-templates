@@ -89,6 +89,10 @@ spec:
           title: VPC Id
           type: string
           description: Enter VPC Id
+        subnet:
+          title: Subnet
+          type: string
+          description: Enter Subnet Mask
 
     - title: Choose a location
       required:
@@ -121,6 +125,7 @@ spec:
           gatewayName: ${{ parameters.gatewayName }}
           gatewaySize: ${{ parameters.gatewaySize }}
           vpcId: ${{ parameters.vpcId }}
+          subnet: ${{ parameters.subnet }}
 
 
     # This step publishes the contents of the working directory to GitHub.
