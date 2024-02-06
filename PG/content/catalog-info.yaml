@@ -6,5 +6,5 @@ metadata:
     - ${{ values.env }}
 spec:
   type: service
-  owner: user:guest
+  owner: team-dhruv
   lifecycle: ${{ values.env }}
