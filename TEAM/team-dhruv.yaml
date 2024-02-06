@@ -1,1 +1,59 @@
-
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: team-dhruv
+  description: Dhruv Technology Solution
+spec:
+  type: team
+  profile:
+    # Intentional no displayName for testing
+    email: admin@something.com
+    picture: https://api.dicebear.com/7.x/identicon/svg?seed=Fluffy&backgroundType=solid,gradientLinear&backgroundColor=ffd5dc,b6e3f4
+  parent: backstage
+  children: []
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: User.One
+spec:
+  profile:
+    displayName: User One
+    email: user-one@example.com
+    picture: https://api.dicebear.com/7.x/avataaars/svg?seed=Luna&backgroundColor=transparent
+  memberOf: [team-dhruv]
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: User.Two
+spec:
+  profile:
+    displayName: User Two
+    email: User-Two@example.com
+    picture: https://api.dicebear.com/7.x/avataaars/svg?seed=Leo&backgroundColor=transparent
+  memberOf: [team-ddhruv]
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: User.Three
+spec:
+  profile:
+    displayName: User Three
+    email: user-three@example.com
+    picture: https://api.dicebear.com/7.x/avataaars/svg?seed=Midnight&backgroundColor=transparent
+  memberOf: [team-dhruv]
+---
+# This user is added as an example, to make it more easy for the "Guest"
+# sign-in option to demonstrate some entities being owned. In a regular org,
+# a guest user would probably not be registered like this.
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: guest
+spec:
+  profile:
+    displayName: Guest User
+    email: guest@example.com
+  memberOf: [team-dhruv]
