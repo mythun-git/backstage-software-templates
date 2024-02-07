@@ -25,6 +25,6 @@ resource "aviatrix_spoke_gateway" "test_spoke_gateway_aws" {
   single_ip_snat    = false
   manage_ha_gateway = false
   tags              = {
-    name = "spoke-gw-app1"
+    name = "${{ values.spokeGatewayTagName }}"
   }
 }
