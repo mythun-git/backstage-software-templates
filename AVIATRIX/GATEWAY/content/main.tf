@@ -20,7 +20,7 @@ provider "aws" {
   region  = "${{ values.region }}"
 }
 resource "aviatrix_gateway" "aviatrix_gateway_aws" {
-  cloud_type         = 1
+  cloud_type         = ${{ values.gatewayCloudType }}
   account_name       = "${{ values.aviatrixGwAccountName }}"
   gw_name            = "${{ values.gatewayName }}"
   vpc_id             = "${{values.vpcId}}"
