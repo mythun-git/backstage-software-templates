@@ -76,7 +76,7 @@ spec:
             rows: 5
 
         volumeType:
-          title: Volume Size
+          title: Volume Type
           type: string
           description: Select Volume size
           enum:
@@ -93,7 +93,6 @@ spec:
           description: Enter controller private IP   
 
     - title: Fill Tag Details
-      required:
       properties:
         environment:
           title: Environment
