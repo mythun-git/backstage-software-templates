@@ -3,8 +3,8 @@ kind: Component
 metadata:
   name: ${{ values.name | dump }}
   tags:
-    - ${{ values.env | dump }}
+    - ${{ values.environment | dump }}
 spec:
   type: service
   owner: team-dhruv
-  lifecycle: ${{ values.env }}
+  lifecycle: ${{ values.environment }}
