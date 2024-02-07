@@ -23,7 +23,7 @@ spec:
           ui:options:
             rows: 5
     
-      -title: Fill AWS Management VPC Details
+    - title: Fill AWS Management VPC Details
       required:
        - vpcCIDR
        - vpcTagName
