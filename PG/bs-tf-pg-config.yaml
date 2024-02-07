@@ -18,7 +18,6 @@ spec:
         name:
           title: Name
           type: string
-          format: password
           description: Unique name of the resource
           ui:autofocus: true
           ui:options:
@@ -82,6 +81,7 @@ spec:
         dbPassword:
           title: User Name
           type: string
+          format: password
           description: Enter the Database User Name
 
     - title: Enter Cloud Configuration
