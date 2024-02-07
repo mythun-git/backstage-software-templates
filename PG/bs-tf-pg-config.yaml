@@ -17,7 +17,7 @@ spec:
       properties:
         name:
           title: Name
-          type: string
+          type: password
           description: Unique name of the resource
           ui:autofocus: true
           ui:options:
