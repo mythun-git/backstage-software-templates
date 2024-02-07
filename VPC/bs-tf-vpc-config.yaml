@@ -14,14 +14,21 @@ spec:
     - title: Enter the resource name
       required:
         - name
+        - region
       properties:
         name:
           title: Name
           type: string
           description: Unique name of the resource
-          ui:autofocus: true
-          ui:options:
-            rows: 5
+        region:
+          title: AWS Region
+          type: string
+          description: The AWS region where the VPC will be deployed
+          enum:
+            - us-east-1
+            - us-east-2
+            - us-west-1
+            - us-west-2
             
     - title: Fill AWS VPC Details
       required:
@@ -141,6 +148,7 @@ spec:
         url: ./content
         values:
           name: ${{ parameters.name }}
+          region: ${{ parameters.region }}
           vpcName: ${{ parameters.vpcName }}
           vpcCidrBlock: ${{ parameters.vpcCidrBlock }}
           publicSubnetCidrBlock: ${{ parameters.publicSubnetCidrBlock }}
