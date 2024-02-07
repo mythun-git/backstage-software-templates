@@ -7,13 +7,13 @@ variable "availability_zone" {
 variable "vpc_cidr" {
   type        = string
   description = "VPC in which you want launch Aviatrix Copilot"
-  default     = "10.0.50.0/24"
+  default     = "${{ values.vpcCidr }}"
 }
 
 variable "subnet_cidr" {
   type        = string
   description = "Subnet in which you want launch Aviatrix Copilot"
-  default     = "10.0.50.0/28"
+  default     = "${{ values.subnetCidr }}"
 }
 
 variable "use_existing_vpc" {
@@ -25,25 +25,25 @@ variable "use_existing_vpc" {
 variable "vpc_id" {
   type        = string
   description = "VPC ID, required when use_existing_vpc is true"
-  default     = "vpc-09701a1ed7ffa52b3"
+  default     = "${{ values.vpcId }}"
 }
 
 variable "subnet_id" {
   type        = string
   description = "Subnet ID, only required when use_existing_vpc is true"
-  default     = "subnet-003a2f669e4059866"
+  default     = "${{ values.subnetId }}"
 }
 variable "security_group_id" {
   type    = string
-  default = "sg-0137b7667556bbb1f"
+  default = "${{ values.securityGroupId }}"
 }
 
 variable "tags" {
   type        = map(string)
   description = "Map of common tags which should be used for module resources"
   default     = {
-    environment = "dev"
-    aws_region  = "US-West-1"
+    environment = "${{ values.environment }}"
+    aws_region  = "${{ values.awsRegion }}"
   }
 }
 
@@ -56,7 +56,7 @@ variable "type" {
 variable "root_volume_size" {
   type        = number
   description = "Root volume size for copilot"
-  default     = 30
+  default     = ${{ values.volumeSize }}
 
   validation {
     condition     = var.root_volume_size >= 30
@@ -67,7 +67,7 @@ variable "root_volume_size" {
 variable "root_volume_type" {
   type        = string
   description = "Root volume type for copilot"
-  default     = "gp2"
+  default     = "${{ values.volumeType }}"
 }
 
 variable "allowed_cidrs" {
@@ -143,13 +143,13 @@ variable "is_cluster" {
 variable "controller_public_ip" {
   type        = string
   description = "Controller public IP"
-  default     = "54.177.217.209"
+  default     = "${{ values.contollerPublicIp }}"
 }
 
 variable "controller_private_ip" {
   type        = string
   description = "Controller private IP"
-  default = "10.0.50.9"
+  default = "${{ values.controllerPrivateIp }}"
 }
 
 data "aws_region" "current" {}
