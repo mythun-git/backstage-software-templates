@@ -13,8 +13,6 @@ provider "aviatrix" {
   username                = "${{ values.userName }}"
   password                = "${{ values.password }}"
   skip_version_validation = true
-  verify_ssl_certificate  =  "${{ values.sslCertificate }}    
-  path_to_ca_certificate  = "${{ values.pathToSslCertificate }}"
 }
 
 provider "aws" {
@@ -28,7 +26,7 @@ resource "aviatrix_gateway" "aviatrix_gateway_aws" {
   vpc_id             = "${{values.vpcId}}"
   vpc_reg            = "${{ values.region }}"
   gw_size            = "${{ values.gatewaySize }}"
-  subnet             = "10.2.1.0/24"
+  subnet             =  "${{ values.gatewaySubnet }}"
   #peering_ha_subnet  = "10.2.1.0/24"
   #peering_ha_gw_size = "${{ values.gatewaySize }}"
 }
