@@ -3,7 +3,7 @@ provider "aws" {
   region  = "${{ values.region }}"
 }
 
-resource "aws_vpc" "${{ values.region }}_region_vpc" {
+resource "aws_vpc" "${replace(values.region, "-", "_")}_region_vpc" {
   cidr_block = "10.0.30.0/24"
 
   tags = {
@@ -12,7 +12,7 @@ resource "aws_vpc" "${{ values.region }}_region_vpc" {
 }
 
 resource "aws_subnet" "us_er_public_subnet" {
-  vpc_id            = aws_vpc.us_east_region_vpc.id
+  vpc_id            = aws_vpc.${replace(values.region, "-", "_")}_region_vpc.id
   cidr_block        = "10.0.30.0/25"
   availability_zone = "us-east-1a"
 
@@ -22,7 +22,7 @@ resource "aws_subnet" "us_er_public_subnet" {
 }
 
 resource "aws_subnet" "us_er_private_subnet" {
-  vpc_id            = aws_vpc.us_east_region_vpc.id
+  vpc_id            = aws_vpc.${replace(values.region, "-", "_")}_region_vpc.id
   cidr_block        = "10.0.30.128/25"
   availability_zone = "us-east-1a"
 
@@ -32,7 +32,7 @@ resource "aws_subnet" "us_er_private_subnet" {
 }
 
 resource "aws_internet_gateway" "us_er_ig" {
-  vpc_id = aws_vpc.us_east_region_vpc.id
+  vpc_id = aws_vpc.${replace(values.region, "-", "_")}_region_vpc.id
 
   tags = {
     Name = "APP1 VPC Internet Gateway"
@@ -40,7 +40,7 @@ resource "aws_internet_gateway" "us_er_ig" {
 }
 
 resource "aws_route_table" "public_rt" {
-  vpc_id = aws_vpc.us_east_region_vpc.id
+  vpc_id = aws_vpc.${replace(values.region, "-", "_")}_region_vpc.id
 
   route {
     cidr_block = "0.0.0.0/0"
@@ -64,7 +64,7 @@ resource "aws_route_table_association" "public_1_rt_a" {
 
 resource "aws_security_group" "web_sg" {
   name   = "APP1 VPC SG"
-  vpc_id = aws_vpc.us_east_region_vpc.id
+  vpc_id = aws_vpc.${replace(values.region, "-", "_")}_region_vpc.id
 
   ingress {
     from_port   = 80
