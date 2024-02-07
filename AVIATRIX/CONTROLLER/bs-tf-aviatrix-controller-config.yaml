@@ -1,1 +1,135 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: terraform-controller
+  title: Terraform Template for Controller
+  description: Create an Controller ...
+spec:
+  owner: mythun-git
+  type: service
+
+  # These parameters are used to generate the input form in the frontend, and are
+  # used to gather input data for the execution of the template.
+  parameters:
+    - title: Enter the resource name
+      required:
+        - name
+        - region
+        - environment
+      properties:
+        name:
+          title: Name
+          type: string
+          description: Unique name of the resource
+        environment:
+          title: Environment
+          type: string
+          description: Enter the Environment
+        region:
+          title: AWS Region
+          type: string
+          description: The AWS region where the VPC will be deployed
+          enum:
+            - us-east-1
+            - us-east-2
+            - us-west-1
+            - us-west-2
+            
+    - title: Fill Controller Details
+      required:
+        - vpcCidr
+        - subnetCidr
+        - vpcId
+        - subnetId
+        - sgId
+        - ec2RoleName
+        - controllerName
+      properties:
+        vpcId:
+          title: VPC ID 
+          type: string
+          description: Enter the VPC ID 
+        vpcCidr:
+          title: VPC CIDR 
+          type: string
+          description: Enter the VPC CIDR 
+        subnetId:
+          title: Subnet ID 
+          type: string
+          description: Enter the Subnet ID 
+        subnetCidr:
+          title: Subnet CIDR 
+          type: string
+          description: Enter the Subnet CIDR 
+        sgId:
+          title: Security Group ID 
+          type: string
+          description: Enter the Security Group ID 
+        ec2RoleName:
+          title: EC2 Role Name 
+          type: string
+          description: Enter the EC2 Role Name 
+        controllerName:
+          title: Controller Name 
+          type: string
+          description: Enter the Controller Name 
+
+    - title: Choose a location
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          title: Repository Location
+          type: string
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
+
+  # These steps are executed in the scaffolder backend, using data that we gathered
+  # via the parameters above.
+  steps:
+    # Each step executes an action, in this case one templates files into the working directory.
+    - id: fetch-base
+      name: Fetch Base
+      action: fetch:template
+      input:
+        url: ./content
+        values:
+          name: ${{ parameters.name }}
+          region: ${{ parameters.region }}
+          environment: ${{ parameters.environment }}
+          vpcCidr: ${{ parameters.vpcCidr }}
+          subnetCidr: ${{ parameters.subnetCidr }}
+          vpcId: ${{ parameters.vpcId }}
+          subnetId: ${{ parameters.subnetId }}
+          sgId: ${{ parameters.sgId }}
+          ec2RoleName: ${{ parameters.ec2RoleName }}
+          controllerName: ${{ parameters.controllerName }}
+          
+    # This step publishes the contents of the working directory to GitHub.
+    - id: publish
+      name: Publish
+      action: publish:github
+      input:
+        allowedHosts: ['github.com']
+        description: This is ${{ parameters.name }}
+        repoUrl: ${{ parameters.repoUrl }}
+
+      # The final step is to register our new component in the catalog.
+    - id: register
+      name: Register
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps['publish'].output.repoContentsUrl }}
+        catalogInfoPath: '/catalog-info.yaml'
+
+  # Outputs are displayed to the user after a successful execution of the template.
+  output:
+    links:
+      - title: Repository
+        url: ${{ steps['publish'].output.remoteUrl }}
+      - title: Open in catalog
+        icon: catalog
+        entityRef: ${{ steps['register'].output.entityRef }}
 
