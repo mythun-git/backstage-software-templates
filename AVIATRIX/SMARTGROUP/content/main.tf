@@ -19,7 +19,7 @@ resource "aviatrix_smart_group" "${{ values.smartGroupName }}_ip" {
   name = "${{ values.smartGroupName }}"
   selector {
     match_expressions {
-      type         = "vpc"
+      type         = "${{ values.smartGroupType }}"
       account_name = "${{ values.smartGroupAccName }}"
       name = "${{ values.smartGroupName }}"
     }
