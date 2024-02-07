@@ -25,10 +25,15 @@ spec:
             
     - title: Fill Postgress DB Details
       required:
-        - region
         - dbIdentifierName
         - databaseName
-        - env
+        - instanceClass
+        - storageSize
+        - storageType
+        - subsetGroupName
+        - databaseName
+        - dbUserName
+        - dbPassword
       properties:
         dbIdentifierName:
           title: Database Identification Name
@@ -45,21 +50,24 @@ spec:
           enum:
             - db.t3.micro
             - db.t3.large
+
         storageSize:
           title: Storage Size
           type: number
           description: Enter Storage Size in GB
-          
-        region:
-          title: AWS Region
-          type: string
-          description: The AWS region where the Postgress db will be deployed to
-          enum:
-            - us-east-1
-            - us-east-2
-            - us-west-1
-            - us-west-2
 
+        storageType:
+         title: Storage Type
+         type: string
+         description: Select storage type
+         enum:
+           - gp2
+
+        subsetGroupName:
+          title: Subset Group Name
+          type: string
+          description: Enter Subset
+          
         databaseName:
           title: Database Name
           type: string
@@ -74,7 +82,13 @@ spec:
           title: User Name
           type: string
           description: Enter the Database User Name
-            
+
+    - title: Enter Cloud Configuration
+      required:
+        - vpcId
+        - securityGroupId
+        - region
+      properties:
         vpcId:
           title: VPC Id
           type: string
@@ -84,6 +98,16 @@ spec:
           title: Security Group Id
           type: string
           description: Enter Security Group Id
+
+        region:
+          title: AWS Region
+          type: string
+          description: The AWS region where the Postgress db will be deployed to
+          enum:
+            - us-east-1
+            - us-east-2
+            - us-west-1
+            - us-west-2
 
         env:
           title: Environment
@@ -127,6 +151,10 @@ spec:
           env: ${{ parameters.env }}
           instanceClass: ${{ parameters.instanceClass }}
           storageSize: ${{ parameters.storageSize }}
+          storageType: ${{ parameters.storageType }}
+          subsetGroupName: ${{ parameters.subsetGroupName }}
+          
+          
 
     # This step publishes the contents of the working directory to GitHub.
     - id: publish
