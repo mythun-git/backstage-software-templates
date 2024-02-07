@@ -39,7 +39,7 @@ module "tgw" {
       vpc_id       = module.vpc.vpc_id
       subnet_ids   = module.vpc.private_subnets
       dns_support  = ${{ values.vpcAttachDnsSupport }}
-      ipv6_support = true
+      ipv6_support = ${{ values.ipv6Support }}
 
       transit_gateway_default_route_table_association = ${{ vlaues.tgDefaultRouteTableAssociation }}
       transit_gateway_default_route_table_propagation = ${{ vlaues.tgDefaultRouteTablePropagation }}
