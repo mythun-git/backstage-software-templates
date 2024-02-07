@@ -14,3 +14,4 @@ spec:
     - ./AVIATRIX/SPOKE_GATEWAY/bs-ts-spokegw-config.yaml
     - ./AVIATRIX/TRANSIT_GATEWAT/bs-tf-transitgw-config.yaml
     - ./AVIATRIX/SMARTGROUP/bs-tf-smartgroup-config.yaml
+    - ./MANAGEMENT_VPC/bc-tf-managementvpc-config.yaml
