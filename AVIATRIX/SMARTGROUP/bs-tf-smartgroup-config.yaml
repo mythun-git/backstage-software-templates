@@ -55,6 +55,11 @@ spec:
           type: string
           description: Aviatrix Smart Group Name
 
+        smartGroupType:
+          title: Smart Group Type
+          type: string
+          description: Enter Smart Group Type
+
         smartGroupAccName:
           title: Smart Group Account Name
           type: string
@@ -94,7 +99,7 @@ spec:
           smartGroupName: ${{ parameters.smartGroupName }}
           smartGroupAccName: ${{ parameters.smartGroupAccName }}
           smartGroupExpName: ${{ parameters.smartGroupExpName }}
-
+          smartGroupType: ${{ parameters.smartGroupType }}
 
     # This step publishes the contents of the working directory to GitHub.
     - id: publish
