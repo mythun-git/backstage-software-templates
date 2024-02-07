@@ -47,19 +47,6 @@ spec:
           title: Password
           type: string
           description: Enter the Aviatrix Password
-
-        sslCertificate:
-          title: SSL Certificate Present?
-          type: string
-          description: SSL certificate present?
-          enum: 
-            - 'true'
-            - 'false'
-
-        pathToSslCertificate:
-          title: Path to SSL Certificate
-          type: string
-          description: Enter the path to ssl certificate if SSL certificate is present
     
     - title: Fill AWS Gateway Details
       required:
@@ -68,6 +55,7 @@ spec:
         - region
         - gatewaySize
         - vpcId
+        - gatewaySubnet
       properties:
         aviatrixGwAccountName:
           title: Account Name
@@ -91,11 +79,16 @@ spec:
             - t2.nano
             - t3.micro
 
+        gatewaySubnet:
+          title: Enter Gateway Subnet
+          type: string
+          description: Enter gateway subnet
+          
         vpcId:          
           title: VPC ID
           type: string
           description: Enter VPC ID
-          
+        
         region:
           title: Region
           type: string
@@ -133,12 +126,11 @@ spec:
           controllerIP: ${{ parameters.controllerIP }}
           userName: ${{ parameters.userName }}
           password: ${{ parameters.password }}
-          sslCertificate: ${{ parameters.sslCertificate }}
-          pathToSslCertificate: ${{ parameters.pathToSslCertificate }}
           aviatrixGwAccountName: ${{ parameters.aviatrixGwAccountName }}
           gatewayName: ${{ parameters.gatewayName }}
           gatewaySize: ${{ parameters.gatewaySize }}
           vpcId: ${{parameters.vpcId}}
+          gatewaySubnet: ${{ parameters.gatewaySubnet }}
 
 
     # This step publishes the contents of the working directory to GitHub.
