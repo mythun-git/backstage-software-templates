@@ -1,4 +1,4 @@
-apiVersion: scaffolder.backstage.io/v1beta3
+  apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: terraform-postgress
@@ -68,6 +68,19 @@ spec:
           type: string
           description: Enter Subset
           
+        engineVersion:
+          title: Engine Version
+          type: string
+          description: Enter Engine Version
+          
+        publiclyAccessible:
+          title: is Publicly Accessible?
+          type: string
+          description: is Publicly Accessible?
+          enum:
+            - true
+            - false
+            
         databaseName:
           title: Database Name
           type: string
@@ -154,9 +167,9 @@ spec:
           storageSize: ${{ parameters.storageSize }}
           storageType: ${{ parameters.storageType }}
           subsetGroupName: ${{ parameters.subsetGroupName }}
+          engineVersion: ${{ parameters.engineVersion }}
+          publiclyAccessible: ${{ parameters.publiclyAccessible }}
           
-          
-
     # This step publishes the contents of the working directory to GitHub.
     - id: publish
       name: Publish
