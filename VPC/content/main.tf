@@ -4,30 +4,30 @@ provider "aws" {
 }
  
 resource "aws_vpc" "${replace(${{ values.region }}, "-", "_")}_region_vpc" {
-  cidr_block = "10.0.30.0/24" // -
+  cidr_block = "${{ values.vpcCidrBlock }}" //"10.0.30.0/24" // -
  
   tags = {
-    Name = "APP1 VPC" // -
+    Name = "${{ values.vpcName }}" //"APP1 VPC" // -
   }
 }
  
 resource "aws_subnet" "us_er_public_subnet" {
   vpc_id            = aws_vpc.${replace(${{ values.region }}, "-", "_")}_region_vpc.id
-  cidr_block        = "10.0.30.0/25" //-
-  availability_zone = "us-east-1a" // -
+  cidr_block        = "${{ values.publicSubnetCidrBlock }}" //"10.0.30.0/25" //-
+  availability_zone = "${{ values.publicSubnetZone }}" //"us-east-1a" // -
  
   tags = {
-    Name = "APP1 VPC Public Subnet" // -
+    Name = "${{ values.publicSubnetName }}" //"APP1 VPC Public Subnet" // -
   }
 }
  
 resource "aws_subnet" "us_er_private_subnet" {
   vpc_id            = aws_vpc.${replace(${{ values.region }}, "-", "_")}_region_vpc.id
-  cidr_block        = "10.0.30.128/25" // -
-  availability_zone = "us-east-1a" // -
+  cidr_block        = "${{ values.privateSubnetCidrBlock }}" //"10.0.30.128/25" // -
+  availability_zone = "${{ values.privateSubnetZone }}" //"us-east-1a" // -
  
   tags = {
-    Name = "APP1 VPC Private Subnet" // -
+    Name = "${{ values.privateSubnetName }}" //"APP1 VPC Private Subnet" // -
   }
 }
  
@@ -35,7 +35,7 @@ resource "aws_internet_gateway" "us_er_ig" {
   vpc_id = aws_vpc.${replace(${{ values.region }}, "-", "_")}_region_vpc.id
  
   tags = {
-    Name = "APP1 VPC Internet Gateway" // -
+    Name = "${{ values.vpcInternetGatewayName }}" //"APP1 VPC Internet Gateway" // -
   }
 }
  
@@ -43,17 +43,17 @@ resource "aws_route_table" "public_rt" {
   vpc_id = aws_vpc.${replace(${{ values.region }}, "-", "_")}_region_vpc.id
  
   route {
-    cidr_block = "0.0.0.0/0" // -
+    cidr_block = "${{ values.vpcRouteCidrBlock }}" //"0.0.0.0/0" // -
     gateway_id = aws_internet_gateway.us_er_ig.id
   }
  
   route {
-    ipv6_cidr_block = "::/0" // -
+    ipv6_cidr_block = "${{ values.vpcRouteIpv6CidrBlock }}" //"::/0" // -
     gateway_id      = aws_internet_gateway.us_er_ig.id
   }
  
   tags = {
-    Name = "APP1 VPC Public Route Table" // -
+    Name = "${{ values.vpcPublicRouteTableName }}" //"APP1 VPC Public Route Table" // -
   }
 }
  
@@ -63,7 +63,7 @@ resource "aws_route_table_association" "public_1_rt_a" {
 }
  
 resource "aws_security_group" "web_sg" {
-  name   = "APP1 VPC SG" // -
+  name   = "${{ values.vpcPublicRouteTableName }}" //"APP1 VPC SG" // -
   vpc_id = aws_vpc.${replace(${{ values.region }}, "-", "_")}_region_vpc.id
  
   ingress {
@@ -93,6 +93,6 @@ resource "aws_security_group" "web_sg" {
   }
  
   tags = {
-    Name = "APP1 VPC SG" // -
+    Name = "${{ values.vpcPublicRouteTableName }}" //"APP1 VPC SG" // -
   }
 }
