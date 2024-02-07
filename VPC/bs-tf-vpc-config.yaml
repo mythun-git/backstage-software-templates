@@ -150,14 +150,11 @@ spec:
           privateSubnetZone: ${{ parameters.privateSubnetZone }}
           privateSubnetName: ${{ parameters.privateSubnetName }}
           vpcInternetGatewayName: ${{ parameters.vpcInternetGatewayName }}
-          vpcRouteIpv6CidrBlock: ${{ parameters.vpcRouteIpv6CidrBlock }}
+          vpcRouteCidrBlock: ${{ parameters.vpcRouteCidrBlock }}
           vpcRouteIpv6CidrBlock: ${{ parameters.vpcRouteIpv6CidrBlock }}
           vpcPublicRouteTableName: ${{ parameters.vpcPublicRouteTableName }}
           vpcSGName: ${{ parameters.vpcSGName }}
 
-        - 
-        - 
-        - ""
     # This step publishes the contents of the working directory to GitHub.
     - id: publish
       name: Publish
