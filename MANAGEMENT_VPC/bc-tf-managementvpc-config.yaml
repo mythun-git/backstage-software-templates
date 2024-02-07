@@ -1,0 +1,173 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: terraform-s3
+  title: Terraform Template for AWS S3
+  description: Create an AWS S3 Bucket ...
+spec:
+  owner: mythun-git
+  type: service
+
+  # These parameters are used to generate the input form in the frontend, and are
+  # used to gather input data for the execution of the template.
+  parameters:
+    - title: Enter the resource name
+      required:
+        - name
+      properties:
+        name:
+          title: Name
+          type: string
+          description: Unique name of the resource
+          ui:autofocus: true
+          ui:options:
+            rows: 5
+    
+      -title: Fill AWS Management VPC Details
+      required:
+       - vpcCIDR
+       - vpcTagName
+      properties:
+        vpcCIDR:
+          title: VPC CIDR Block
+          type: string
+          description: Enter VPC CIDR block
+        
+        vpcTagName:
+          title: VPC Tag Name
+          type: string
+          description: Enter VPC tag name
+
+    - title: Fill AWS Subnet Details
+      required:
+        - awsPrivateSubnetCIDR
+        - awsPrivateSubnetAvlZone
+        - awsPrivateSubnetTagName
+        - awsPublicSubnetCIDR
+        - awsPublicSubnetAvlZone
+        - awsPublicSubnetTagName
+      properties:
+        awsPrivateSubnetCIDR:
+          title: Private Subnet CIDR
+          type: string
+          description: Enter private subnet CID block
+          ui:autofocus: true
+          ui:options:
+            rows: 5
+
+        awsPrivateSubnetAvlZone:
+          title: Private Subnet Availability Zone
+          type: string
+          description:  Select private subnet availability zone
+          enum:
+            - us-east-1a
+            - us-east-1b
+            - us-west-1a
+
+        awsPrivateSubnetTagName:
+          title: Private Subnet Tag Name
+          type: string
+          description: Enter private subnet tag name
+
+        awsPublicSubnetCIDR:
+          title: Public Subnet CIDR
+          type: string
+          description: Enter public subnet CID block
+
+        awsPublicSubnetAvlZone:
+          title: Public Subnet Availability Zone
+          type: string
+          description:  Select public subnet availability zone
+          enum:
+            - us-east-1a
+            - us-east-1b
+            - us-west-1a
+
+        awsPublicSubnetTagName:
+          title: public Subnet Tag Name
+          type: string
+          description: Enter public subnet tag name
+    
+    - title: Fill in Tag Names
+      required:
+        - internetGatewayTagName 
+        - routeTableTagName
+        - awsSecurityGroupTagName 
+
+      properties:
+        internetGatewayTagName:
+          title: AWS Internet Gateway Tag Name
+          type: string
+          description: Enter tag name for AWS Internet Gateway
+
+        routeTableTagName:
+          title: AWS Route Table Tag Name
+          type: string
+          description: Enter tag name for AWS Route Table
+
+        awsSecurityGroupTagName:
+          title: AWS Security Group Tag Name
+          type: string
+          description: Enter tag name for AWS Security Group
+      
+    - title: Choose a location
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          title: Repository Location
+          type: string
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
+
+  # These steps are executed in the scaffolder backend, using data that we gathered
+  # via the parameters above.
+  steps:
+    # Each step executes an action, in this case one templates files into the working directory.
+    - id: fetch-base
+      name: Fetch Base
+      action: fetch:template
+      input:
+        url: ./content
+        values:
+          name: ${{ parameters.name }}
+          internetGatewayTagName: ${{ parameters.internetGatewayTagName }}
+          routeTableTagName: ${{ parameters.routeTableTagName }}
+          awsSecurityGroupTagName : ${{ parameters.awsSecurityGroupTagName }}
+          awsPrivateSubnetCIDR: ${{ parameters.awsPrivateSubnetCIDR }}
+          awsPrivateSubnetAvlZone: ${{ parameters.awsPrivateSubnetAvlZone }}
+          awsPrivateSubnetTagName: ${{ parameters.awsPrivateSubnetTagName }}
+          awsPublicSubnetCIDR: ${{ parameters.awsPublicSubnetCIDR }}
+          awsPublicSubnetAvlZone: ${{ parameters.awsPublicSubnetAvlZone }}
+          awsPublicSubnetTagName: ${{ parameters.awsPublicSubnetTagName }}
+          vpcCIDR: ${{ parameters.vpcCIDR }}
+          vpcTagName: ${{ parameters.vpcTagName }}
+
+
+    # This step publishes the contents of the working directory to GitHub.
+    - id: publish
+      name: Publish
+      action: publish:github
+      input:
+        allowedHosts: ['github.com']
+        description: This is ${{ parameters.name }}
+        repoUrl: ${{ parameters.repoUrl }}
+
+      # The final step is to register our new component in the catalog.
+    - id: register
+      name: Register
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps['publish'].output.repoContentsUrl }}
+        catalogInfoPath: '/catalog-info.yaml'
+
+  # Outputs are displayed to the user after a successful execution of the template.
+  output:
+    links:
+      - title: Repository
+        url: ${{ steps['publish'].output.remoteUrl }}
+      - title: Open in catalog
+        icon: catalog
+        entityRef: ${{ steps['register'].output.entityRef }}
