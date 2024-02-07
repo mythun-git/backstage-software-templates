@@ -7,13 +7,13 @@ variable "availability_zone" {
 variable "vpc_cidr" {
   type        = string
   description = "VPC in which you want launch Aviatrix controller"
-  default     = "10.0.50.0/24" // -
+  default     = "${{ values.vpcCidr }}" //"10.0.50.0/24" // -
 }
 
 variable "subnet_cidr" {
   type        = string
   description = "Subnet in which you want launch Aviatrix controller"
-  default     = "10.0.50.0/28" // -
+  default     = "${{ values.subnetCidr }}" //"10.0.50.0/28" // -
 }
 
 variable "use_existing_vpc" {
@@ -25,32 +25,32 @@ variable "use_existing_vpc" {
 variable "vpc_id" {
   type        = string
   description = "VPC ID, required when use_existing_vpc is true"
-  default     = "vpc-09701a1ed7ffa52b3" // -
+  default     = "${{ values.vpcId }}" //"vpc-09701a1ed7ffa52b3" // -
 }
 
 variable "subnet_id" {
   type        = string
   description = "Subnet ID, only required when use_existing_vpc is true"
-  default     = "subnet-003a2f669e4059866" //-
+  default     = "${{ values.subnetId }}" //"subnet-003a2f669e4059866" //-
 }
 
 variable "security_group_id" {
   type    = string
-  default = "sg-0137b7667556bbb1f" //-
+  default = "${{ values.sgId }}" //"sg-0137b7667556bbb1f" //-
 }
 
 variable "ec2_role_name" {
   type        = string
   description = "EC2 role for controller"
-  default     = "aviatrixrole" // -
+  default     = "${{ values.ec2RoleName }}" //"aviatrixrole" // -
 }
 
 variable "tags" {
   type        = map(string)
   description = "Map of common tags which should be used for module resources"
   default     = {
-    environment = "dev" // -
-    aws_region  = "US-West-1" // -
+    environment = "${{ values.environment }}" //"dev" // -
+    aws_region  = "${{ values.region }}" //"US-West-1" // -
   }
 }
 
@@ -104,7 +104,7 @@ variable "type" {
 variable "controller_name" {
   type        = string
   description = "Name of controller that will be launched. If not set, default name will be used."
-  default     = "Aviatrix_Controller_r1" // -
+  default     = "${{ values.controllerName }}" //"Aviatrix_Controller_r1" // -
 }
 
 variable "root_volume_encrypted" {
