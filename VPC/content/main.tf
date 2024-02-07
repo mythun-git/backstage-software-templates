@@ -63,7 +63,7 @@ resource "aws_route_table_association" "public_1_rt_a" {
 }
  
 resource "aws_security_group" "web_sg" {
-  name   = "${{ values.vpcPublicRouteTableName }}" //"APP1 VPC SG" // -
+  name   = "${{ values.vpcSGName }}" //"APP1 VPC SG" // -
   vpc_id = aws_vpc.${replace(${{ values.region }}, "-", "_")}_region_vpc.id
  
   ingress {
@@ -93,6 +93,6 @@ resource "aws_security_group" "web_sg" {
   }
  
   tags = {
-    Name = "${{ values.vpcPublicRouteTableName }}" //"APP1 VPC SG" // -
+    Name = "${{ values.vpcSGName }}" //"APP1 VPC SG" // -
   }
 }
