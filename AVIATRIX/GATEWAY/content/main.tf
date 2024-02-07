@@ -24,8 +24,8 @@ provider "aws" {
 resource "aviatrix_gateway" "aviatrix_gateway_aws" {
   cloud_type         = 1
   account_name       = "${{ values.aviatrixAccountName }}"
-  gw_name            = ""${{ values.gatewayName }}""
-  vpc_id             = "vpc-0fc6a37e65c750f6a"
+  gw_name            = "${{ values.gatewayName }}"
+  vpc_id             = "${{values.vpcId}}"
   vpc_reg            = "${{ values.region }}"
   gw_size            = "${{ values.gatewaySize }}"
   subnet             = "10.2.1.0/24"
