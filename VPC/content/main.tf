@@ -12,7 +12,7 @@ resource "aws_vpc" "${replace(values.region, "-", "_")}_region_vpc" {
 }
 
 resource "aws_subnet" "us_er_public_subnet" {
-  vpc_id            = aws_vpc.${replace(values.region, "-", "_")}_region_vpc.id
+  vpc_id            = aws_vpc.${replace(${{ values.region }}, "-", "_")}_region_vpc.id
   cidr_block        = "10.0.30.0/25"
   availability_zone = "us-east-1a"
 
