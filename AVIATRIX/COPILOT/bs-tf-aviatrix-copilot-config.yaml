@@ -77,7 +77,7 @@ spec:
 
         volumeType:
           title: Volume Size
-          type: number
+          type: string
           description: Select Volume size
           enum:
             - gp2
