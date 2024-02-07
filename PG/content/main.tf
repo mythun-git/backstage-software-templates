@@ -19,7 +19,7 @@ resource "aws_db_instance" "my_${{ values.dbIdentifierName}}" {
     instance_class         = "${{ values.instanceClass }}"
     allocated_storage      = ${{ values.storageSize }}
     db_name                = "${{ values.databaseName}}"
-    storage_type           = "gp2"
+    storage_type           = "${{ values.storageType}}"
     engine                 = "postgres"
     engine_version         = "15.5"
     skip_final_snapshot    = true
@@ -27,7 +27,7 @@ resource "aws_db_instance" "my_${{ values.dbIdentifierName}}" {
     username               = "${{ values.dbUserName }}"
     password               = "${{ values.dbPassword }}"
     vpc_security_group_ids = [var.security_group_id]
-    db_subnet_group_name = "default-vpc-005aa4d379e350404"
+    db_subnet_group_name = "${{ values.subsetGroupName }}"
     #vpc_id                 = var.vpc_id
 
     tags = {
