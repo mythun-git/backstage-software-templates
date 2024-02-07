@@ -1,1 +1,169 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: terraform-dcf
+  title: Terraform Template for DFC
+  description: Create DCF
+spec:
+  owner: mythun-git
+  type: service
 
+  # These parameters are used to generate the input form in the frontend, and are
+  # used to gather input data for the execution of the template.
+  parameters:
+    - title: Enter the resource name
+      required:
+        - name
+      properties:
+        name:
+          title: Name
+          type: string
+          description: Unique name of the resource
+          ui:autofocus: true
+          ui:options:
+            rows: 5
+            
+    - title: Fill in VPC, Subnet and Security Group Details
+      required:
+        - vpcId
+        - vpcCidr
+        - subnetId
+        - subnetCidr
+        - securityGroupId
+      properties:
+        vpcId:
+          title: VPC Id
+          type: string
+          description: Enter VPC Id
+          ui:autofocus: true
+          ui:options:
+            rows: 5
+
+        vpcCidr:
+          title: VPC CIDR
+          type: string
+          description: VPC in which you want launch Aviatrix Copilot
+        
+        subnetId:
+          title: Subnet Id
+          type: string
+          description: Enter Subnet Id
+          ui:autofocus: true
+          ui:options:
+            rows: 5
+
+        subnetCidr:
+          title: Subnet CIDR
+          type: string
+          description: Enter Subnet CIDR
+
+        securityGroupId:
+          title: Security Group Id
+          type: string
+          description: Enter Security Group Id
+
+    - title: Fill Volume details and Controller details
+      required:
+        - volumeSize
+        - volumeType
+        - contollerPublicIp
+        - controllerPrivateIp
+        
+      properties:
+        volumeSize:
+          title: Volume Size
+          type: number
+          description: Enter Volume size
+
+        volumeType:
+          title: Volume Size
+          type: number
+          description: Select Volume size
+          enum:
+            - gp2
+        
+        contollerPublicIp:
+          title: Controller Public IP
+          type: string
+          description: Enter controller public IP
+
+        controllerPrivateIp:
+          title: Controller Private IP
+          type: string
+          description: Enter controller private IP   
+
+    - title: Fill Tag Details
+      required:
+      properties:
+        environment:
+          title: Environment
+          type: string
+          description: Select Environment (tag)
+          enum:
+            - development
+            - qa
+            - production
+        awsRegion:
+          title: AWS Region
+          type: string
+          description: Enter AWS Region (tag)
+
+    - title: Choose a location
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          title: Repository Location
+          type: string
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
+
+  # These steps are executed in the scaffolder backend, using data that we gathered
+  # via the parameters above.
+  steps:
+    # Each step executes an action, in this case one templates files into the working directory.
+    - id: fetch-base
+      name: Fetch Base
+      action: fetch:template
+      input:
+        url: ./content
+        values:
+          name: ${{ parameters.name }}
+          volumeSize: ${{ parameters.volumeSize }}
+          volumeType: ${{ parameters.volumeType }}
+          contollerPublicIp: ${{ parameters.contollerPublicIp }}
+          controllerPrivateIp: ${{ parameters.controllerPrivateIp }}
+          vpcId: ${{ parameters.vpcId }}
+          vpcCidr: ${{ parameters.vpcCidr }}
+          subnetId: ${{ parameters.subnetId }}
+          subnetCidr: ${{ parameters.subnetCidr }}
+          securityGroupId: ${{ parameters.securityGroupId }}
+          awsRegion: ${{ parameters.awsRegion }}
+          environment: ${{ parameters.environment }}
+
+    # This step publishes the contents of the working directory to GitHub.
+    - id: publish
+      name: Publish
+      action: publish:github
+      input:
+        allowedHosts: ['github.com']
+        description: This is ${{ parameters.name }}
+        repoUrl: ${{ parameters.repoUrl }}
+          # The final step is to register our new component in the catalog.
+    - id: register
+      name: Register
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps['publish'].output.repoContentsUrl }}
+        catalogInfoPath: '/catalog-info.yaml'
+
+  # Outputs are displayed to the user after a successful execution of the template.
+  output:
+    links:
+      - title: Repository
+        url: ${{ steps['publish'].output.remoteUrl }}
+      - title: Open in catalog
+        icon: catalog
+        entityRef: ${{ steps['register'].output.entityRef }}
