@@ -66,6 +66,15 @@ spec:
           enum:
             - PERMIT
             - DENY
+        priority1:
+          title: Policy Priority [1]
+          type: string
+          description: Enter Policy Priority
+        protocol1:
+          title: Policy Protocol [1]
+          type: string
+          description: Enter Policy Protocol
+        
             
         dfPolicyName2:
           title: Policy Name [2]
@@ -78,6 +87,14 @@ spec:
           enum:
             - PERMIT
             - DENY
+        priority1:
+          title: Policy Priority [1]
+          type: string
+          description: Enter Policy Priority
+        protocol1:
+          title: Policy Protocol [1]
+          type: string
+          description: Enter Policy Protocol
           
         sourceSmartGroup:
           title: Source Smart Group
@@ -117,8 +134,12 @@ spec:
           password: ${{ parameters.password }}
           dfPolicyName1: ${{ parameters.dfPolicyName1 }}
           action1: ${{ parameters.action1 }}
+          priority1: ${{ parameters.priority1 }}
+          protocol1: ${{ parameters.priority1 }}
           dfPolicyName2: ${{ parameters.dfPolicyName2 }}
           action2: ${{ parameters.action2 }}
+          priority2: ${{ parameters.priority2 }}
+          protocol2: ${{ parameters.priority2 }}
           sourceSmartGroup: ${{ parameters.sourceSmartGroup }}
           destinationSmartGroup: ${{ parameters.destinationSmartGroup }}
 
