@@ -23,27 +23,101 @@ spec:
           ui:options:
             rows: 5
             
-    - title: Fill VPC Details
+    - title: Fill AWS VPC Details
       required:
         - vpcName
+        - vpcCidrBlock
       properties:
         vpcName:
-          title: VPC Name
+          title: AWS VPC Name
           type: string
-          description: Enter the Name for the VPC
-          ui:autofocus: true
-          ui:options:
-            rows: 5
-        region:
-          title: AWS Region
+          description: Enter the Name for the AWS VPC
+          # ui:autofocus: true
+          # ui:options:
+          #   rows: 5
+        vpcCidrBlock:
+          title: AWS VPC CIDR Block
           type: string
-          description: The AWS region where the VPC will be deployed
+          description: Enter the AWS VPC CIDR Block
+          # enum:
+          #   - us-east-1
+          #   - us-east-2
+          #   - us-west-1
+          #   - us-west-2
+            
+    - title: Fill AWS Subnet Details
+      required:
+        - publicSubnetCidrBlock
+        - publicSubnetZone
+        - publicSubnetName
+        - privateSubnetCidrBlock
+        - privateSubnetZone
+        - privateSubnetName
+      properties:
+        publicSubnetName:
+          title: AWS Public Subnet Name
+          type: string
+          description: Enter the Name for the AWS Public Subnet
+        publicSubnetCidrBlock:
+          title: AWS Public Subnet CIDR Block
+          type: string
+          description: Enter the AWS Public Subnet CIDR Block
+        publicSubnetZone:
+          title: AWS Public Subnet Zone
+          type: string
+          description: Select the AWS Public Subnet
           enum:
             - us-east-1
             - us-east-2
             - us-west-1
             - us-west-2
-            
+        privateSubnetName:
+          title: AWS Private Subnet Name
+          type: string
+          description: Enter the Name for the AWS Private Subnet
+        privateSubnetCidrBlock:
+          title: AWS Private Subnet CIDR Block
+          type: string
+          description: Enter the AWS Private Subnet CIDR Block
+        privateSubnetZone:
+          title: AWS Private Subnet Zone
+          type: string
+          description: Select the AWS Private Subnet
+          enum:
+            - us-east-1
+            - us-east-2
+            - us-west-1
+            - us-west-2
+
+    - title: Fill AWS Details
+      required:
+        - vpcInternetGatewayName
+        - vpcRouteCidrBlock
+        - vpcRouteIpv6CidrBlock
+        - vpcPublicRouteTableName
+        - vpcSGName
+      properties:
+        vpcInternetGatewayName:
+          title: AWS Internet Gateway Name
+          type: string
+          description: Enter the Name for the AWS Internet Gateway
+        vpcRouteCidrBlock:
+          title: AWS Route Table CIDR Block
+          type: string
+          description: Enter the AWS Route Table CIDR Block
+        vpcRouteIpv6CidrBlock:
+          title: AWS Route Table IPV6 CIDR Block
+          type: string
+          description: Enter the AWS Route Table IPV6 CIDR Block
+        vpcPublicRouteTableName:
+          title: AWS Public Route Table Name
+          type: string
+          description: Enter the AWS Public Route Table Name
+        vpcSGName:
+          title: AWS Secuirty Group Name
+          type: string
+          description: Enter the AWS Secuirty Group Name
+
     - title: Choose a location
       required:
         - repoUrl
@@ -68,8 +142,22 @@ spec:
         values:
           name: ${{ parameters.name }}
           vpcName: ${{ parameters.vpcName }}
-          region: ${{ parameters.region }}
+          vpcCidrBlock: ${{ parameters.vpcCidrBlock }}
+          publicSubnetCidrBlock: ${{ parameters.publicSubnetCidrBlock }}
+          publicSubnetZone: ${{ parameters.publicSubnetZone }}
+          publicSubnetName: ${{ parameters.publicSubnetName }}
+          privateSubnetCidrBlock: ${{ parameters.privateSubnetCidrBlock }}
+          privateSubnetZone: ${{ parameters.privateSubnetZone }}
+          privateSubnetName: ${{ parameters.privateSubnetName }}
+          vpcInternetGatewayName: ${{ parameters.vpcInternetGatewayName }}
+          vpcRouteIpv6CidrBlock: ${{ parameters.vpcRouteIpv6CidrBlock }}
+          vpcRouteIpv6CidrBlock: ${{ parameters.vpcRouteIpv6CidrBlock }}
+          vpcPublicRouteTableName: ${{ parameters.vpcPublicRouteTableName }}
+          vpcSGName: ${{ parameters.vpcSGName }}
 
+        - 
+        - 
+        - ""
     # This step publishes the contents of the working directory to GitHub.
     - id: publish
       name: Publish
