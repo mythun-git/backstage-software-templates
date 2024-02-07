@@ -27,7 +27,18 @@ spec:
       required:
         - instanceType
         - region
+        - amiId
       properties:
+        instanceName:
+          title: Instance Name
+          type: string
+          description: Enter Instance Name (tag)
+
+        amiId:
+          title: AMI Id
+          type: string
+          description: Enter AMI Id
+
         instanceType:
           title: Instance Type
           type: string
@@ -37,6 +48,26 @@ spec:
             - t2.nano
             - t3.micro
             - c5.large
+
+        subnetId:
+          title: Subnet Id
+          type: string
+          description: Enter Subnet Id
+        
+        securityGroupIds:
+          title: Security Group Id
+          type: string
+          description: Enter security group id
+
+        volumeSize:
+          title: Volume Size
+          type: number
+          description: Enter volume size
+
+        volumeType:
+          title: Volume Type
+          type: string
+          description: Enter volume type
 
         region:
           title: AWS Region
@@ -72,7 +103,13 @@ spec:
         values:
           name: ${{ parameters.name }}
           region: ${{ parameters.region }}
+          amiId: ${{ parameters.amiId }}
           instanceType: ${{ parameters.instanceType }}
+          subnetId: ${{ parameters.subnetId }}
+          securityGroupIds: ${{ parameters.securityGroupIds }}
+          instanceName: ${{ parameters.instanceName }}
+          volumeSize: ${{ parameters.volumeSize }}
+          volumeType: ${{ parameters.volumeType }}
 
     # This step publishes the contents of the working directory to GitHub.
     - id: publish
