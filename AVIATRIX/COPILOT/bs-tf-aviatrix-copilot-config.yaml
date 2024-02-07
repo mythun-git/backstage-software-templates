@@ -1,9 +1,9 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: terraform-dcf
-  title: Terraform Template for DFC
-  description: Create DCF
+  name: terraform-avaiatrix-copilot
+  title: Terraform Template for Aviatrix Copilot
+  description: Create Aviatrix Copilot
 spec:
   owner: mythun-git
   type: service
