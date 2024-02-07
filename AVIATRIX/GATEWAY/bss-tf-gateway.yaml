@@ -70,6 +70,11 @@ spec:
           type: string
           desctiption: Enter Name for Gatewat
 
+        gatewayCloudType:
+          title: Gateway Cloud Type
+          type: number
+          desctiption: Enter the gateway cloud type
+
         gatewaySize:
           title: Gateway Size
           type: string
@@ -128,10 +133,10 @@ spec:
           password: ${{ parameters.password }}
           aviatrixGwAccountName: ${{ parameters.aviatrixGwAccountName }}
           gatewayName: ${{ parameters.gatewayName }}
+          gatewayCloudType: ${{ parameters.gatewayCloudType }}
           gatewaySize: ${{ parameters.gatewaySize }}
           vpcId: ${{parameters.vpcId}}
           gatewaySubnet: ${{ parameters.gatewaySubnet }}
-
 
     # This step publishes the contents of the working directory to GitHub.
     - id: publish
