@@ -21,9 +21,9 @@ resource "aws_db_instance" "my_${{ values.dbIdentifierName}}" {
     db_name                = "${{ values.databaseName}}"
     storage_type           = "${{ values.storageType}}"
     engine                 = "postgres"
-    engine_version         = "15.5"
+    engine_version         = "${{ values.engineVersion}}"
     skip_final_snapshot    = true
-    publicly_accessible    = false
+    publicly_accessible    = ${{ values.publiclyAccessible}}
     username               = "${{ values.dbUserName }}"
     password               = "${{ values.dbPassword }}"
     vpc_security_group_ids = [var.security_group_id]
