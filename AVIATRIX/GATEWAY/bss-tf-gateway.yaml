@@ -67,6 +67,7 @@ spec:
         - gatewayName
         - region
         - gatewaySize
+        - vpcId
       properties:
         aviatrixGwAccountName:
           title: Account Name
@@ -89,7 +90,12 @@ spec:
             - t2.micro
             - t2.nano
             - t3.micro
-        
+
+        vpcId:          
+          title: VPC ID
+          type: string
+          description: Enter VPC ID
+          
         region:
           title: Region
           type: string
@@ -132,6 +138,7 @@ spec:
           aviatrixGwAccountName: ${{ parameters.aviatrixGwAccountName }}
           gatewayName: ${{ parameters.gatewayName }}
           gatewaySize: ${{ parameters.gatewaySize }}
+          vpcId: ${{parameters.vpcId}}
 
 
     # This step publishes the contents of the working directory to GitHub.
