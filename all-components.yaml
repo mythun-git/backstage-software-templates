@@ -15,3 +15,5 @@ spec:
     - ./AVIATRIX/TRANSIT_GATEWAT/bs-tf-transitgw-config.yaml
     - ./AVIATRIX/SMARTGROUP/bs-tf-smartgroup-config.yaml
     - ./MANAGEMENT_VPC/bc-tf-managementvpc-config.yaml
+    - ./AVIATRIX/COPILOT/bs-tf-aviatrix-copilot-config.yaml
+    - ./AVIATRIX/CONTROLLER/bs-tf-aviatrix-controller-config.yaml
