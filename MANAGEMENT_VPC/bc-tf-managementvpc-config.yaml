@@ -1,9 +1,9 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: terraform-s3
-  title: Terraform Template for AWS S3
-  description: Create an AWS S3 Bucket ...
+  name: terraform-management-vpc
+  title: Terraform Template Management VPC
+  description: Create an Management VPC...
 spec:
   owner: mythun-git
   type: service
