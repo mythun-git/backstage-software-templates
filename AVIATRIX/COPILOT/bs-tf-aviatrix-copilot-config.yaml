@@ -48,9 +48,6 @@ spec:
           title: Subnet Id
           type: string
           description: Enter Subnet Id
-          ui:autofocus: true
-          ui:options:
-            rows: 5
 
         subnetCidr:
           title: Subnet CIDR
@@ -74,6 +71,9 @@ spec:
           title: Volume Size
           type: number
           description: Enter Volume size
+          ui:autofocus: true
+          ui:options:
+            rows: 5
 
         volumeType:
           title: Volume Size
