@@ -47,7 +47,7 @@ spec:
           type: string
           description: Enter the Aviatrix Password
 
-    - title: Fill AWS Gateway Details
+    - title: Fill Aviatrix Gateway Details
       required:
         - aviatrixGwAccountName
         - gatewayName
@@ -89,10 +89,16 @@ spec:
           title: VPC Id
           type: string
           description: Enter VPC Id
+          
         subnet:
           title: Subnet
           type: string
           description: Enter Subnet Mask
+
+        spokeGatewayTagName:
+          title: Gateway Tag Name
+          type: string
+          description: Enter Aviatrix Gateway Tag Name
 
     - title: Choose a location
       required:
@@ -126,7 +132,7 @@ spec:
           gatewaySize: ${{ parameters.gatewaySize }}
           vpcId: ${{ parameters.vpcId }}
           subnet: ${{ parameters.subnet }}
-
+          spokeGatewayTagName: ${{ parameters.spokeGatewayTagName }}
 
     # This step publishes the contents of the working directory to GitHub.
     - id: publish
