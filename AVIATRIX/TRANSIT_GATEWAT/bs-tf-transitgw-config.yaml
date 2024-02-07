@@ -14,6 +14,7 @@ spec:
     - title: Enter the resource name
       required:
         - name
+        - region
       properties:
         name:
           title: Name
@@ -22,38 +23,6 @@ spec:
           ui:autofocus: true
           ui:options:
             rows: 5
-            
-    - title: Fill Aviatrx Details
-      required:
-        - controllerIP
-      properties:
-        controllerIP:
-          title: Controller IP
-          type: string
-          description: Enter the Aviatrix Controller IP
-          ui:autofocus: true
-          ui:options:
-            rows: 5
-
-
-    - title: Fill AWS Gateway Details
-      required:
-        - aviatrixGwAccountName
-        - gatewayName
-        - region
-      properties:
-        aviatrixGwAccountName:
-          title: Account Name
-          type: string
-          description: Enter Account Name for AWS Gateway
-          ui:autofocus: true
-          ui:options:
-            rows: 5
-        
-        gatewayName:
-          title: Gateway Name
-          type: string
-          desctiption: Enter Name for Gatewat
         
         region:
           title: Region
@@ -64,8 +33,24 @@ spec:
             - us-east-2
             - us-west-1
             - us-west-2
+            
+    - title: Fill GIT Details
+      required:
+        - gitHubRepo
+        - gitHubOrg
+      properties:
+        gitHubRepo:
+          title: Git Hub Repo
+          type: string
+          description: Enter Git Hub Repo Name
+        
+        gitHubOrg:
+          title: Git Hub Origanization
+          type: string
+          desctiption: Enter Git Hub Origanization
+        
 
-    - title: Choose a location
+    - title: Transit Gateway Details
       required:
         - repoUrl
       properties:
