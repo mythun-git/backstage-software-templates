@@ -36,20 +36,20 @@ resource "local_file" "private_key" {
 
 
 resource "aws_instance" "public_instance" {
-  ami                    = "ami-0c7217cdde317cfec"
+  ami                    = "${{ values.amiId }}"
   instance_type          = "${{ values.instanceType }}"
   key_name               = aws_key_pair.key_pair.key_name
-  subnet_id              = "subnet-0b620eefbe9679408"
-  vpc_security_group_ids = ["sg-04ffd5db7addf4598"]
+  subnet_id              = "${{ values.subnetId }}"
+  vpc_security_group_ids = "${{ values.securityGroupIds }}"
   associate_public_ip_address = true
 
   
   tags = {
-    Name = "APP1 EC2"
+    Name = "${{ values.instanceName }}"
   }
 
   root_block_device {
-    volume_size = 30
-    volume_type = "gp2"
+    volume_size = ${{ values.volumeSize }}
+    volume_type = "${{ values.volumeType }}"
   }
 }
