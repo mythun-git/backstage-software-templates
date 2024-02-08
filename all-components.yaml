@@ -5,9 +5,10 @@ metadata:
   description: A collection of all Backstage example components
 spec:
   targets:
-    - https://github.com/mythun-git/backstage-software-templates/blob/master/EC2/bs-tf-ec2-config.yaml
-    - https://github.com/mythun-git/backstage-software-templates/blob/master/DCF/bs-tf-dcf-config.yaml
-    - https://github.com/mythun-git/backstage-software-templates/blob/master/MANAGEMENT_VPC/bc-tf-managementvpc-config.yaml
-    - https://github.com/mythun-git/backstage-software-templates/blob/master/PG/bs-tf-pg-config.yaml
-    - https://github.com/mythun-git/backstage-software-templates/blob/master/S3/bs-tf-s3-config.yaml
-    - https://github.com/mythun-git/backstage-software-templates/blob/master/VPC/bs-tf-vpc-config.yaml
+    - ./EC2/bs-tf-ec2-config.yaml
+    - ./EC2/bs-tf-ec2-config.yaml
+    - ./DCF/bs-tf-dcf-config.yaml
+    - ./MANAGEMENT_VPC/bc-tf-managementvpc-config.yaml
+    - ./PG/bs-tf-pg-config.yaml
+    - ./S3/bs-tf-s3-config.yaml
+    - ./VPC/bs-tf-vpc-config.yaml
