@@ -24,7 +24,11 @@ spec:
         environment:
           title: Environment
           type: string
-          description: Enter the Environment
+          description: Select the Environment
+          enum:
+            - development
+            - qa
+            - production
         region:
           title: AWS Region
           type: string
