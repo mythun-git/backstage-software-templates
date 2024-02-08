@@ -6,3 +6,4 @@ metadata:
 spec:
   targets:
     - ./TEAM/team-dhruv.yaml
+    - ./DCF/bs-tf-dcf-config.yaml
