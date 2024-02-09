@@ -3,8 +3,4 @@ kind: Location
 metadata:
   name: terraform-components
   description: A collection of all Terraform Template for backstage
-spec:
-  targets:
-    - ./EC2/bs-tf-ec2-config.yaml
-    - ./PG/bs-tf-pg-config.yaml
-    - ./S3/bs-tf-s3-config.yaml 
+
