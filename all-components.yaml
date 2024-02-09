@@ -3,4 +3,7 @@ kind: Location
 metadata:
   name: terraform-components
   description: A collection of all Terraform Template for backstage
+spec:
+  target:
+    - ./VPC/bs-tf-vpc-config.yaml
 
